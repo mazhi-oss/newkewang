@@ -1,5 +1,7 @@
 package com.newkewang.utils;
 
+import org.apache.kafka.common.protocol.types.Field;
+
 /**
  * @author xiaozhi
  * @description
@@ -50,6 +52,16 @@ public interface CommunityConstant {
      * 主题：评论
      */
     String TOPIC_COMMENT = "comment";
+
+    /**
+     * 主题：发帖
+     */
+    String TOPIC_PUBLISH = "publish";
+
+    /**
+     * 主题：删帖
+     */
+    String TOPIC_DELETE = "delete";
 
     /**
      * 实体类型：点赞

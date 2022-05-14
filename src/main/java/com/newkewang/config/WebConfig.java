@@ -1,6 +1,5 @@
 package com.newkewang.config;
 
-import com.newkewang.controller.interceptor.LoginRequiredInterceptor;
 import com.newkewang.controller.interceptor.LoginTicketInterceptor;
 import com.newkewang.controller.interceptor.MessageInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

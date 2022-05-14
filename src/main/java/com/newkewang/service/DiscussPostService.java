@@ -2,11 +2,13 @@ package com.newkewang.service;
 
 import com.newkewang.entity.DiscussPost;
 import com.newkewang.mapper.DiscussPostMapper;
+import com.newkewang.utils.CommunityUtil;
 import com.newkewang.utils.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -56,4 +58,11 @@ public class DiscussPostService {
         return discussPostMapper.updateCommentCount(id, commentCount);
     }
 
+    public int setType(int id, int type) {
+        return discussPostMapper.updateType(id, type);
+    }
+
+    public int setStatus(int id, int status) {
+        return discussPostMapper.updateStatus(id, status);
+    }
 }

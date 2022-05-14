@@ -36,21 +36,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
         http.authorizeRequests()
                 // 拦截路径
                 .antMatchers(
-//                        "/user/setting",
-//                        "/user/upload",
-//                        "/discuss/add",
-//                        "/comment/add/**",
-//                        "/letter/**",
-//                        "/notice/**",
-//                        "/like",
-//                        "/follow",
-//                        "/unfollow"
+                        "/user/setting",
+                        "/user/upload",
+                        "/discuss/add",
+                        "/comment/add/**",
+                        "/letter/**",
+                        "/notice/**",
+                        "/like",
+                        "/follow",
+                        "/unfollow"
                 )
                 // 可以访问对应的路径的授权
                 .hasAnyAuthority(
                         AUTHORITY_USER,
                         AUTHORITY_ADMIN,
                         AUTHORITY_MODERATOR
+                )
+                .antMatchers(
+                        "/discuss/top",
+                    "/discuss/wonderful"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_MODERATOR
+                ).antMatchers(
+                        "/discuss/delete"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_ADMIN
                 )
                 // 除了上面的路径，其他的忽略
                 .anyRequest().permitAll()

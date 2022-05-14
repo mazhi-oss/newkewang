@@ -2,7 +2,9 @@ package com.newkewang.controller;
 
 import com.newkewang.entity.Comment;
 import com.newkewang.entity.DiscussPost;
+import com.newkewang.entity.Event;
 import com.newkewang.entity.User;
+import com.newkewang.event.EventProducer;
 import com.newkewang.service.CommentService;
 import com.newkewang.service.DiscussPostService;
 import com.newkewang.service.LikeService;
@@ -45,6 +47,9 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
 
     @PostMapping("/add")
     @ResponseBody
@@ -63,6 +68,14 @@ public class DiscussPostController implements CommunityConstant {
         post.setStatus(0);
         post.setScore(0.0);
         discussPostService.addDiscussPost(post);
+
+        // 触发发帖事件
+        Event event = new Event();
+        event.setTopic(TOPIC_PUBLISH);
+        event.setUserId(user.getId());
+        event.setEntityType(ENTITY_TYPE_POST);
+        event.setEntityId(post.getId());
+        eventProducer.fireEvent(event);
 
         return CommunityUtil.getJsonString(0, "发布成功！");
     }
@@ -153,6 +166,57 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments", commentVoList);
 
         return "/site/discuss-detail";
+    }
+
+    // 置顶帖子
+    @PostMapping("/top")
+    @ResponseBody
+    public String setTop(int id) {
+        discussPostService.setType(id, 1);
+
+        // 触发发帖事件
+        Event event = new Event();
+        event.setTopic(TOPIC_PUBLISH);
+        event.setUserId(hostHolder.getUser().getId());
+        event.setEntityType(ENTITY_TYPE_POST);
+        event.setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJsonString(0);
+    }
+
+    // 加精帖子
+    @PostMapping("/wonderful")
+    @ResponseBody
+    public String setWonderful(int id) {
+        discussPostService.setStatus(id, 1);
+
+        // 触发发帖事件
+        Event event = new Event();
+        event.setTopic(TOPIC_PUBLISH);
+        event.setUserId(hostHolder.getUser().getId());
+        event.setEntityType(ENTITY_TYPE_POST);
+        event.setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJsonString(0);
+    }
+
+    // 删除帖子
+    @PostMapping("/delete")
+    @ResponseBody
+    public String setDelete(int id) {
+        discussPostService.setStatus(id, 2);
+
+        // 触发发帖事件
+        Event event = new Event();
+        event.setTopic(TOPIC_DELETE);
+        event.setUserId(hostHolder.getUser().getId());
+        event.setEntityType(ENTITY_TYPE_POST);
+        event.setEntityId(id);
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJsonString(0);
     }
 
 }

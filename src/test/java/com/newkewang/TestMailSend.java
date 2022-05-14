@@ -1,8 +1,7 @@
 package com.newkewang;
 
-import com.newkewang.entity.User;
 import com.newkewang.utils.MailClient;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.thymeleaf.TemplateEngine;
@@ -31,7 +30,8 @@ public class TestMailSend {
         String content = templateEngine.process("/mail/demo", context);
         System.out.println(content);
         // 发送html到邮箱
-        mailClient.sendMail("1596971466@qq.com", "HTML", content);
+//        mailClient.sendMail("1596971466@qq.com", "HTML", content);
     }
+
 
 }

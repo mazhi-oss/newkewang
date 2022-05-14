@@ -4,7 +4,7 @@ import com.newkewang.entity.DiscussPost;
 import com.newkewang.mapper.DiscussPostMapper;
 import com.newkewang.mapper.UserMapper;
 import com.newkewang.entity.User;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;

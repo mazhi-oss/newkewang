@@ -1,11 +1,10 @@
 package com.newkewang.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
 
-import java.io.FileInputStream;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -55,5 +54,6 @@ public class CommunityUtil {
         map.put("name", "张三");
         map.put("age", 18);
         System.out.println(getJsonString(0, "ok", map));
+
     }
 }

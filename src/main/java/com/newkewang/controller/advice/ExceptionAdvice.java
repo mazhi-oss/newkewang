@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 /**
  * @author xiaozhi
- * @description
+ * @description 全局异常处理器
  * @create 2022-03-2022/3/29 21:49
  */
 @ControllerAdvice(annotations = Controller.class)
