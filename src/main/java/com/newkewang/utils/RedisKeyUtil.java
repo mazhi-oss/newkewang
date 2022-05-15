@@ -1,5 +1,6 @@
 package com.newkewang.utils;
 
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,6 +40,16 @@ public class RedisKeyUtil {
      * 验证码前缀
      */
     private static final String PREFIX_USER = "user";
+
+    /**
+     * UV前缀
+     */
+    private static final String PREFIX_UV = "uv";
+
+    /**
+     * DAU前缀
+     */
+    private static final String PREFIX_DAU = "dau";
 
 
     /**
@@ -95,5 +106,33 @@ public class RedisKeyUtil {
      */
     public static String getUserKey(int userId) {
         return PREFIX_USER + SPLIT + userId;
+    }
+
+    /**
+     * 单个UV
+     */
+    public static String getUVKey(String date) {
+        return PREFIX_UV + SPLIT + date;
+    }
+
+    /**
+     * 区间UV
+     */
+    public static String getUVKey(String startDate, String endDate) {
+        return PREFIX_UV + SPLIT + startDate + SPLIT + endDate;
+    }
+
+    /**
+     * 单日活跃用户
+     */
+    public static String getDAUKey(String date) {
+        return PREFIX_DAU + SPLIT + date;
+    }
+
+    /**
+     * 区间活跃用户
+     */
+    public static String getDAUKey(String startDate, String endDate) {
+        return PREFIX_DAU + SPLIT + startDate + SPLIT + endDate;
     }
 }
